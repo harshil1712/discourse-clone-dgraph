@@ -7,6 +7,7 @@ This web app is the clone of Discourse built using Dgraph and React.
 ### Requirements
 
 Before proceeding forward make sure you have the following things installed:
+
     1. [node.js](https://nodejs.org)
     1. [docker]()
     1. [ngrok]()
