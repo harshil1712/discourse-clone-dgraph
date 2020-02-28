@@ -32,11 +32,11 @@ const Navbar = () => {
         <div className="navbar-end">
           <div className="navbar-item">
             {!isAuthenticated ? (
-              <button onClick={loginWithRedirect} className="button is-primary">
+              <button onClick={loginWithRedirect} className="button is-white">
                 Log in
               </button>
             ) : (
-              <button onClick={logout} className="button is-primary">
+              <button onClick={logout} className="button is-danger is-light">
                 Log out
               </button>
             )}
