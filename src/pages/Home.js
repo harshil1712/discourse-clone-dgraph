@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
+import { Link } from 'react-router-dom'
 import Card from '../components/Card';
 
 const CATEGORIES = gql`
@@ -27,6 +28,9 @@ const DisplayCards = ()=> {
 export default () => {
     return(
         <div className="container">
+            <div style={{textAlign:"right"}}>
+            <Link className="button" to="/create">Create New Topic</Link>
+            </div>
             <DisplayCards />
         </div>
     )

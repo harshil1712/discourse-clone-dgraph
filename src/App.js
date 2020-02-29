@@ -1,12 +1,13 @@
-import React  from 'react';
-import { useAuth0 } from './auth0-context';
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
-// import { useQuery } from '@apollo/react-hooks'
-// import { gql } from 'apollo-boost'
-import Navbar from './components/Navbar';
-import Home from './pages/Home'
+import React, { useEffect } from "react";
+import { useAuth0 } from "./auth0-context";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import history from "./utils/history";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import PrivateRoute from "./components/PrivateRoute";
+import CreateNewTopic from "./pages/CreateNewTopic";
 
-import "bulma/css/bulma.css"
+import "bulma/css/bulma.css";
 
 // const USER = gql`
 //   {
@@ -17,15 +18,15 @@ import "bulma/css/bulma.css"
 // `
 
 function App() {
-  const { isLoading, user, loginWithRedirect, logout } = useAuth0();
-  // const {data} = useQuery(USER)
-  // console.log(data)
-  console.log(user)
+  const { isAuthenticated } = useAuth0();
+  // console.log(isAuthenticated)
+
   return (
-    <BrowserRouter>
-      <Navbar/>
+    <BrowserRouter history={history}>
+      <Navbar />
       <Switch>
-        <Route path="/" component={Home} />
+        <Route path="/" exact component={Home} />
+        <PrivateRoute exact path="/create" component={CreateNewTopic} />
       </Switch>
     </BrowserRouter>
   );

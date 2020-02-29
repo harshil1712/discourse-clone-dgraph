@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Card = ({name, description, topics}) => {
-    console.log(topics)
     return(
         <div className="box">
             <div className="columns">
@@ -17,7 +16,7 @@ const Card = ({name, description, topics}) => {
                             <ul>
                                 {
                                     topics.map(({title}) => (
-                                        <li><a href="#">{title}</a></li>
+                                        <li key={title}><a href="#">{title}</a></li>
                                     ))
                                 }
                             </ul>

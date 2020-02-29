@@ -31,7 +31,7 @@ export const Auth0Provider = ({
       const isAuthenticated = await auth0FromHook.isAuthenticated();
 
       setIsAuthenticated(isAuthenticated);
-
+      localStorage.setItem('isAuthenticated', isAuthenticated)
       if (isAuthenticated) {
         const user = await auth0FromHook.getUser();
         setUser(user);
