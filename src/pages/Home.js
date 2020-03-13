@@ -11,6 +11,7 @@ const CATEGORIES = gql`
             description
             topics {
                 title
+                id
             }
         }
     }
