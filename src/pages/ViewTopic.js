@@ -3,6 +3,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import { Link } from "react-router-dom";
 import Like from "../components/Like";
+import Comments from "../components/Comments"
 
 const GET_TOPIC = gql`
   query TOPIC($topicID: ID!) {
@@ -16,6 +17,10 @@ const GET_TOPIC = gql`
         username
       }
       likes
+      replies{
+        text
+        id
+      }
     }
   }
 `;
@@ -40,7 +45,7 @@ export default ({ match }) => {
         </Link>
       </div>
       <div className="title is-parent is-vertical">
-        <article className="tile is-child is-8">
+        <article className="tile is-child is-10">
           <span className="tag is-primary">{data.getTopic.category.name}</span>
           <h1 className="is-size-1 is-capitalized">{data.getTopic.title}</h1>
           <p className="subtitle is-5">{data.getTopic.text}</p>
@@ -61,6 +66,7 @@ export default ({ match }) => {
       <br />
       <h5 className="subtitle is-5">Replies</h5>
       <hr />
+      <Comments replies={data.getTopic.replies} id={topicID} />
     </div>
   );
 };
