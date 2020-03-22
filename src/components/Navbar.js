@@ -15,7 +15,7 @@ const Navbar = () => {
         <div className="navbar-brand">
           <Link className="navbar-item" to="/">
             {" "}
-            Discourse
+            Forum
           </Link>
           <a
             role="button"

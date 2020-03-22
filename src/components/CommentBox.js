@@ -11,11 +11,15 @@ const ADD_REPLY = gql`
   }
 `;
 
+// const FETCH_REPLY = gql`
+//   query getReply
+// `
+
 const CommentBox = ({ topicId }) => {
   const [comment, setComment] = useState("");
   const [err, setErr] = useState("")
   const { user: AuthUser } = useAuth0();
-  const [addReply] = useMutation(ADD_REPLY)
+  const [addReply, {loading, data}] = useMutation(ADD_REPLY)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,12 +31,14 @@ const CommentBox = ({ topicId }) => {
           user: {username:AuthUser.email},
           isRepyTo: { id: topicId }
         }
-        addReply({variables:{reply}})
-        setErr("")
-        setComment("")
+        await addReply({variables:{reply}})
+        console.log(data)
+
       } else {
         setErr("Reply can't be empty")
       }
+
+      setComment("")
     }
   };
   return (
@@ -46,7 +52,7 @@ const CommentBox = ({ topicId }) => {
         />
       </div>
       {err!=""? <div>{err}</div> : <br />}
-      <button className="button is-primary" onClick={async e => await handleSubmit(e)}>
+      <button className={loading?"button is-primary is-loading":"button is-primary"} onClick={async e => await handleSubmit(e)}>
         Reply
       </button>
     </div>
