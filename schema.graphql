@@ -1,0 +1,31 @@
+type User {
+    username: String! @id
+    email: String!
+    topics: [Topic] @hasInverse(field: user)
+    replies: [Reply] @hasInverse(field: user)
+}
+
+interface Post {
+    id: ID!
+    text: String!
+    dataPublished: DateTime
+    user: User!
+    likes: Int
+}
+
+type Topic implements Post {
+    title: String!  @search(by: [fulltext])
+    replies: [Reply] @hasInverse(field: isRepyTo)
+    category: Category!
+    tag: [String] @search(by: [hash])
+}
+
+type Reply implements Post {
+    isRepyTo: Topic!
+}
+
+type Category {
+    name: String! @id @search(by: [hash])
+    description: String!
+    topics: [Topic] @hasInverse(field: category)
+}
